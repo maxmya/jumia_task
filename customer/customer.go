@@ -3,13 +3,14 @@ package customer
 import (
 	"../database"
 	"../models"
+	"../utils"
 	"github.com/gin-gonic/gin"
 )
 
 func GetCustomers(c *gin.Context) {
 	var customers []models.Customer
 	database.CONNECTION.Find(&customers)
-	var customersResponse = models.CategorizeCustomersByPhoneNumbers(customers)
+	var customersResponse = utils.CategorizeCustomersByPhoneNumbers(customers)
 	c.JSON(200, &customersResponse)
 }
 

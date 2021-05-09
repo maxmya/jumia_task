@@ -1,0 +1,51 @@
+<div class="wrapper">
+  Filter By Country
+  <mat-form-field appearance="outline">
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="one">First option</mat-option>
+      <mat-option value="two">Second option</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <br>
+  <ng-container *ngFor="let customer of customers$|async">
+    <table *ngIf="customer.country" class="mat-elevation-z5">
+      <thead>
+      <tr>
+        <th>Country Name</th>
+        <th>Country Code</th>
+      </tr>
+      <tr>
+        <td>{{customer.country.name}}</td>
+        <td>{{customer.country.code}}</td>
+      </tr>
+      <tr>
+        <th colspan="2">Customers</th>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <table>
+            <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let person of customer.customers">
+              <td>{{person.id}}</td>
+              <td>{{person.name}}</td>
+              <td>{{person.phone}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </thead>
+    </table>
+    <br>
+  </ng-container>
+</div>
+

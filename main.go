@@ -3,33 +3,25 @@ package main
 import (
 	"./customer"
 	"./database"
-	"fmt"
 	"github.com/gin-gonic/gin"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
-	"gorm.io/gorm/schema"
 )
 
-func initDatabase() {
-	var err error
-	database.CONNECTION, err = gorm.Open(sqlite.Open("sample.db"), &gorm.Config{
-		NamingStrategy: schema.NamingStrategy{
-			SingularTable: true,
-		},
-	})
-	if err != nil {
-		panic("failed to connect database")
+// CORSMiddleware : allow CORS access from all
+func CORSMiddleware() gin.HandlerFunc {
+	return func(context *gin.Context) {
+		context.Header("Access-Control-Allow-Origin", "*")
+		context.Next()
 	}
-	fmt.Println("Database connected successfully")
 }
 
 func setupRoutes() {
-	r := gin.Default()
-	r.GET("/customers", customer.GetCustomers)
-	r.GET("/customers/:id", customer.GetCustomer)
-	r.POST("/customers/add", customer.AddCustomer)
+	router := gin.Default()
+	router.Use(CORSMiddleware())
+	router.GET("/customers", customer.GetCustomers)
+	router.GET("/customers/:id", customer.GetCustomer)
+	router.POST("/customers/add", customer.AddCustomer)
 
-	err := r.Run()
+	err := router.Run()
 	if err != nil {
 		panic("could not run gin app")
 		return
@@ -37,6 +29,6 @@ func setupRoutes() {
 }
 
 func main() {
-	initDatabase()
+	database.InitDatabase()
 	setupRoutes()
 }
