@@ -1,17 +1,22 @@
 <div class="wrapper">
   Filter By Country
   <mat-form-field appearance="outline">
-    <mat-label>Select</mat-label>
-    <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
+    <mat-label>Select Country</mat-label>
+    <mat-select [(ngModel)]="selectedCountry">
+      <mat-option value="all">ALL</mat-option>
+      <mat-option value="cameron">Cameron</mat-option>
+      <mat-option value="ethiopia">Ethiopia</mat-option>
+      <mat-option value="morocco">Morocco</mat-option>
+      <mat-option value="mozambique">Mozambique</mat-option>
+      <mat-option value="uganda">Uganda</mat-option>
+      <mat-option value="wrong numbers">Wrong Numbers</mat-option>
     </mat-select>
   </mat-form-field>
   <br>
   <br>
   <ng-container *ngFor="let customer of customers$|async">
     <table *ngIf="customer.country" class="mat-elevation-z5">
-      <thead>
+      <thead *ngIf="selectedCountry==customer.country.name.toLowerCase()||selectedCountry=='all'">
       <tr>
         <th>Country Name</th>
         <th>Country Code</th>

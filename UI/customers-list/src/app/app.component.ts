@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {Observable} from "rxjs";
-import {CustomersResponse} from "./data/customers.response";
-import {CustomerService} from "./services/customer.service";
+import {Observable} from 'rxjs';
+import {CustomersResponse} from './data/customers.response';
+import {CustomerService} from './services/customer.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,8 @@ import {CustomerService} from "./services/customer.service";
 })
 export class AppComponent {
 
-  customers$: Observable<Array<CustomersResponse>>
+  customers$: Observable<Array<CustomersResponse>>;
+  selectedCountry: String = 'all';
 
   constructor(private customerService: CustomerService) {
     this.customers$ = customerService.listCustomers();
