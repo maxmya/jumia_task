@@ -76,12 +76,29 @@ func CategorizeCustomersByPhoneNumbers(customers []models.Customer) []models.Cus
 		}
 	}
 
-	customersResponse = append(customersResponse, cameronCustomers)
-	customersResponse = append(customersResponse, ethiopiaCustomers)
-	customersResponse = append(customersResponse, moroccoCustomers)
-	customersResponse = append(customersResponse, mozambiqueCustomers)
-	customersResponse = append(customersResponse, ugandaCustomers)
-	customersResponse = append(customersResponse, noneCustomers)
+	if len(cameronCustomers.Customers) > 0 {
+		customersResponse = append(customersResponse, cameronCustomers)
+	}
+
+	if len(ethiopiaCustomers.Customers) > 0 {
+		customersResponse = append(customersResponse, ethiopiaCustomers)
+	}
+
+	if len(moroccoCustomers.Customers) > 0 {
+		customersResponse = append(customersResponse, moroccoCustomers)
+	}
+
+	if len(mozambiqueCustomers.Customers) > 0 {
+		customersResponse = append(customersResponse, mozambiqueCustomers)
+	}
+
+	if len(ugandaCustomers.Customers) > 0 {
+		customersResponse = append(customersResponse, ugandaCustomers)
+	}
+
+	if len(noneCustomers.Customers) > 0 {
+		customersResponse = append(customersResponse, noneCustomers)
+	}
 
 	return customersResponse
 }
